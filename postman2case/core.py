@@ -82,10 +82,10 @@ class PostmanParser(object):
             if "item" in folder.keys():
                 for item in folder["item"]:
                     api = self.parse_each_item(item)
-                    result.append({"api": api})
+                    result.append({"test": api})
             else:
                 api = self.parse_each_item(folder)
-                result.append({"api": api})
+                result.append({"test": api})
 
         with io.open(output_testset_file, 'w', encoding="utf-8") as outfile:
             my_json_str = json.dumps(result, ensure_ascii=ensure_ascii, indent=4)
