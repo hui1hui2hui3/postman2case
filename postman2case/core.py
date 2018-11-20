@@ -50,7 +50,10 @@ class PostmanParser(object):
                 mode = item["request"]["body"]["mode"]
                 if isinstance(item["request"]["body"][mode], list):
                     for param in item["request"]["body"][mode]:
-                        api["variables"].append({param["key"]: parse_value_from_type(param["value"])})
+                        if "value" in param.keys():
+                            api["variables"].append({param["key"]: parse_value_from_type(param["value"])})
+                        elif "src" in param.keys():
+                            api["variables"].append({param["key"]: parse_value_from_type(param["src"])})
                         body[param["key"]] = "$"+param["key"]
             request["json"] = body
         else:
